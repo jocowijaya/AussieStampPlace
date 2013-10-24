@@ -1,0 +1,113 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .style1 {
+            text-decoration: underline;
+        }
+    </style>
+    </head>
+<body>
+    <form id="form1" runat="server">
+    <div id="PageWrapper">
+        <div id="header">
+            
+        </div>
+
+        <div id="breadcrumb">
+        
+            <asp:SiteMapPath ID="SiteMapPath1" runat="server">
+            </asp:SiteMapPath>
+        
+        </div>
+
+        <div id="main">
+            <div id="sidebar">
+               
+
+                    <br /> 
+                    Select a theme
+                    <br /> 
+                
+                    <asp:DropDownList ID="ThemeList" runat="server" AutoPostBack="True" 
+                        onselectedindexchanged="ThemeList_SelectedIndexChanged">
+                        <asp:ListItem>Monochrome</asp:ListItem>
+                        <asp:ListItem>Colour1</asp:ListItem>
+                    </asp:DropDownList>
+                
+
+               
+                <div id="menu">
+                    <br /> 
+                    <br />   
+                    Navigation<br />
+                    ============== <br />
+                    <asp:TreeView ID="TreeView1" runat="server" DataSourceID="SiteMapDataSource1">
+                        <LevelStyles>
+                            <asp:TreeNodeStyle CssClass="" />
+                        </LevelStyles>
+                    </asp:TreeView>
+                    <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" 
+                        ShowStartingNode="False" />
+
+                    <br /> 
+                    <br /> 
+                    
+                </div>
+
+                <br />
+
+                <div id="loginarea">
+                
+                    <asp:LoginView ID="UserLoginView" runat="server">
+                        <AnonymousTemplate>
+                            <asp:Login ID="UserLogin" runat="server" 
+                                CreateUserText="Not a member? Please register!" 
+                                CreateUserUrl="~/Pages/Register.aspx" CssClass="loginControl" 
+                                DisplayRememberMe="False" TextLayout="TextOnTop">
+                            </asp:Login>
+                        </AnonymousTemplate>
+
+                        <LoggedInTemplate>
+                            <asp:LoginStatus ID="UserLoginStatus" runat="server"/>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                    
+                    <asp:LoginName ID="UserLoginName" runat="server" FormatString="Welcome back <br/ >{0}." />
+                
+                </div>
+
+            </div>
+
+            <div id="content">
+                 <asp:ContentPlaceHolder ID="cpMainContent" runat="server">
+                 </asp:ContentPlaceHolder>
+            </div>
+        </div>
+        
+        <div id="footer">
+            
+            <div id="copyright">
+                <p>
+                    <span class="style1">© Joco Wijaya</span>
+                    <br />
+                    All Images
+                &#169;
+                    R.Balsys</p>
+            </div>
+
+            <div id="lastupdate">
+                <p>Last Updated: <%= DateTime.Now.ToShortDateString() %></p>
+            </div>
+            
+        </div>
+    </div>
+    </form>
+</body>
+</html>
